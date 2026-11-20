@@ -7,7 +7,7 @@
 :root{--bg:#0d0f12;--panel:#171b22;--panel2:#1d222b;--text:#f1f4f9;--muted:#9aa5b4;--line:#2a323f;--red:#ed1d24;--red-dark:#7a0f14;--green:#55c58a;--blue:#72a9f5;--gold:#e8bd65}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-h1,h2,.brand-sub,.save-btn{font-family:'Arial Black','Arial Narrow Bold',Impact,Haettenschweiler,'Franklin Gothic Bold',system-ui,sans-serif}
+h1,h2,.brand-sub{font-family:'Arial Black','Arial Narrow Bold',Impact,Haettenschweiler,'Franklin Gothic Bold',system-ui,sans-serif}
 .layout{display:flex;align-items:flex-start;min-height:100vh}
 .sidebar{width:250px;flex:0 0 250px;background:linear-gradient(180deg,#1a0d0e,#12151b 65%);border-right:2px solid var(--red-dark);padding:18px 16px 16px;position:sticky;top:0;align-self:flex-start;height:100vh;overflow-y:auto;display:flex;flex-direction:column;gap:16px}
 .brand{display:flex;flex-direction:column;align-items:flex-start;gap:5px;padding-bottom:10px;border-bottom:2px solid var(--red)}
@@ -22,17 +22,15 @@ h1,h2,.brand-sub,.save-btn{font-family:'Arial Black','Arial Narrow Bold',Impact,
 .sidebar-link-btn{appearance:none;-webkit-appearance:none;align-self:flex-start;background:none;border:none;padding:0;color:var(--muted);font:inherit;font-size:.76rem;cursor:pointer;text-decoration:underline;text-underline-offset:2px}
 .sidebar-link-row{display:flex;gap:16px;flex-wrap:wrap}
 .sidebar-link-btn:hover{color:var(--text)}
+.sidebar-link-btn:disabled{opacity:.5;cursor:default;pointer-events:none}
 .progress-mini{margin-top:auto;padding-top:6px;border-top:1px solid var(--line)}
 .progress-mini-line{height:6px;background:#2a323f;border-radius:20px;overflow:hidden}
 .progress-mini-fill{height:100%;width:0;background:var(--green);transition:width .2s}
 .progress-mini-text{display:flex;justify-content:space-between;font-size:.74rem;color:var(--muted);margin-top:5px}
-.save-btn{background:var(--red);border:1px solid var(--red-dark);color:#fff;padding:10px 12px;font:inherit;font-weight:700;text-transform:uppercase;letter-spacing:.03em;cursor:pointer;clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);transition:background-color .15s,border-color .15s,color .15s}
-.save-btn:hover:not(:disabled){filter:brightness(1.12)}
-.save-btn:disabled{background:var(--panel2);border-color:var(--line);color:var(--muted);cursor:default}
 #saveStatus{min-height:1.2em;font-size:.76rem}
 .status-ok{color:var(--green)}.status-warn{color:var(--gold)}.status-err{color:var(--red)}.status-info{color:var(--blue)}
 .content-area{flex:1;min-width:0}
-.page-header{padding:26px 26px 8px;max-width:980px}
+.page-header{padding:26px 26px 8px;max-width:980px;margin:0 auto}
 .page-header h1{font-size:clamp(1.25rem,2.4vw,1.8rem);letter-spacing:.02em;text-transform:uppercase;margin:0 0 6px}
 .page-header .lead{font-size:.9rem;margin:0;max-width:680px;color:var(--muted)}
 main{max-width:980px;margin:auto;padding:4px 26px 22px}
@@ -84,7 +82,7 @@ footer{max-width:980px;margin:0 auto;padding:14px 26px 40px;color:var(--muted);f
 h2{font-size:1.2rem;letter-spacing:.02em;text-transform:uppercase;margin:0 0 6px;padding-top:4px;border-top:3px solid var(--red);display:inline-block}
 .section-toggle{cursor:pointer;user-select:none;display:inline-flex;align-items:flex-start;gap:7px}
 .section-toggle:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
-.section-toggle .chevron{flex:0 0 auto;display:inline-block;font-size:.8em;margin-top:.2em;transition:transform .15s}
+.section-toggle .chevron{flex:0 0 auto;display:inline-block;font-size:1.4em;margin-top:-.3em;transition:transform .15s}
 .section-toggle .title-text{min-width:0}
 .section.collapsed .chevron{transform:rotate(-90deg)}
 .section.collapsed .section-intro,.section.collapsed .items{display:none}
@@ -99,7 +97,7 @@ p{margin:5px 0;color:var(--muted)}
 .progress-mini{margin-top:4px}
 .sidebar-toggle{display:flex;align-items:flex-start;gap:8px;width:100%;background:var(--panel2);border:1px solid var(--line);color:var(--text);padding:12px 14px;border-radius:8px;font:inherit;font-weight:700;font-size:.85rem;letter-spacing:.02em;text-align:left;cursor:pointer;margin-top:10px}
 .sidebar-toggle .title-text{flex:1;min-width:0}
-.sidebar-toggle .chevron{flex:0 0 auto;font-size:.8em;margin-top:.2em}
+.sidebar-toggle .chevron{flex:0 0 auto;font-size:1.4em;margin-top:-.15em}
 .sidebar-collapsible{display:none;margin-top:14px}
 .sidebar-collapsible.open{display:flex}
 .check{width:19px;height:19px}
@@ -144,8 +142,8 @@ p{margin:5px 0;color:var(--muted)}
 <div class="progress-mini-line" id="progressLine"><div class="progress-mini-fill" id="progressFill"></div></div>
 <div class="progress-mini-text"><span id="progressText">0/0 watched</span><span id="progressPct">0%</span></div>
 </div>
-<button id="saveHtml" class="save-btn" disabled>Download a copy</button>
 <div class="sidebar-link-row">
+<button type="button" id="saveHtml" class="sidebar-link-btn">↓ Download a copy</button>
 <button type="button" id="resetProgress" class="sidebar-link-btn">↺ Reset progress</button>
 <button type="button" id="aboutBtn" class="sidebar-link-btn">ⓘ About &amp; saving</button>
 </div>
@@ -179,11 +177,11 @@ p{margin:5px 0;color:var(--muted)}
 <h2 id="aboutTitle">About this page</h2>
 <div class="modal-detail">
 <p>This is a personal, fan-made guide to watching the Marvel Cinematic Universe and related Marvel film/TV franchises in a sensible order — not an official Marvel, Disney or Marvel Studios product.</p>
-<p>The descriptions, Essential/Recommended/Optional priority tags and viewing-order notes were researched and written with AI assistance. Treat them as a helpful starting point, not gospel — there's bound to be the odd mistake or debatable call. If something's off, that's on the write-up, not you!</p>
+<p>The descriptions, Essential/Recommended/Optional priority tags and viewing-order notes were entirely AI-generated. Treat them as a helpful starting point, not gospel — there's bound to be the odd mistake or debatable call, so take anything that seems off with a pinch of salt rather than as fact.</p>
 <h3>How your progress is saved</h3>
 <p>Your ticks and notes save automatically in this browser's storage as you go — no account needed. They'll still be there next time you open this exact page in this same browser, on this same device.</p>
 <p>This can be lost if you clear this browser's site data, use a private/incognito window, or open the page in a different browser or on a different device — each keeps its own separate copy, with nothing synced between them.</p>
-<p><strong>Download a copy</strong> saves a standalone HTML file with your current progress built in — a good backup, a way to move your progress somewhere else, or a fully offline copy that needs no browser storage at all.</p>
+<p><strong>Download a copy</strong> saves a standalone HTML file with your current progress built in — a good backup, a way to move your progress somewhere else, or a fully offline copy that needs no browser storage at all. In a browser that supports it (e.g. Chrome, Edge), the first click asks you to pick your existing watchlist file and immediately overwrites it with your current progress; every click after that writes straight back into that same file without asking again — so it's genuinely keeping one file up to date, not piling up copies. In other browsers (e.g. Safari), it downloads a brand-new file each time, and you'll need to manually replace your old one with it to keep your progress.</p>
 </div>
 </div>
 </div>
@@ -468,11 +466,9 @@ function mergedInitialData(){
 // pages, full quota), progress tracking, filtering and saving keep working
 // correctly off currentData — they never depend on localStorage succeeding.
 let currentData=mergedInitialData();
-// An entry with no tick and no note is meaningless — keep it pruned so the
-// data model (and therefore JSON.stringify comparisons used for dirty-
-// tracking) never drifts from what a fresh/untouched item looks like. Without
-// this, ticking then unticking a box leaves behind {"watched":false}, which
-// differs textually from "no entry at all" even though nothing really changed.
+// An entry with no tick and no note is meaningless — delete it rather than
+// leaving behind a placeholder like {"watched":false}, so localStorage and
+// any downloaded file only ever record titles that actually have progress.
 function pruneIfEmpty(entries,id){
  const e=entries[id];
  if(e&&!e.watched&&!(e.comment&&e.comment.trim()))delete entries[id];
@@ -491,23 +487,7 @@ function persistLocal(){
   setStatus('Your progress is working here, but couldn’t be auto-saved to this browser (storage may be disabled). Use “Download a copy” to keep it.','warn');
  }
 }
-// Tracks whether currentData has changed since the last successful save, so
-// the Save button can stay disabled — and out of the way — until there's
-// actually something to save. The baseline is set two different ways: after
-// an actual save, it's the full current state (the file now matches it); at
-// page load, it's whatever's embedded in the file on disk — never localStorage,
-// which can hold changes (from an earlier session) the file doesn't have yet.
-let dataAtLastSave=null;
-function updateSaveButtonState(){
- const btn=document.getElementById('saveHtml');
- if(!btn)return;
- btn.disabled=(JSON.stringify(getData())===dataAtLastSave);
-}
-function markSaved(){
- dataAtLastSave=JSON.stringify(getData());
- updateSaveButtonState();
-}
-function save(id,k,v){currentData[id]=currentData[id]||{};currentData[id][k]=v;pruneIfEmpty(currentData,id);persistLocal();updateSaveButtonState();}
+function save(id,k,v){currentData[id]=currentData[id]||{};currentData[id][k]=v;pruneIfEmpty(currentData,id);persistLocal();}
 function restore(){const d=getData();document.querySelectorAll('.item').forEach(card=>{const x=d[card.dataset.id]||{};const cb=card.querySelector('input');cb.checked=!!x.watched;card.classList.toggle('done',cb.checked);card.classList.toggle('has-notes',!!(x.comment&&x.comment.trim()));});updateProgress();}
 // Matches the same predicate applyFilters uses to show/hide cards, so the
 // sidebar's count/percentage always reflects whatever is currently visible
@@ -670,7 +650,6 @@ async function handleSaveClick(){
  }
  if(!('showOpenFilePicker' in window)){
   downloadHtml(html);
-  markSaved();
   setStatus('Your browser can’t save directly to the file, so an updated copy was downloaded. Replace your previous watchlist file with it.','warn');
   return;
  }
@@ -692,7 +671,6 @@ async function handleSaveClick(){
   const writable=await fileHandle.createWritable();
   await writable.write(html);
   await writable.close();
-  markSaved();
   setStatus('Saved to '+(fileHandle.name||'your watchlist file')+'.','ok');
  }catch(err){
   if(err&&err.name==='AbortError'){
@@ -702,11 +680,10 @@ async function handleSaveClick(){
    fileHandle=null;
    await clearStoredFileHandle();
    downloadHtml(html);
-   markSaved();
    setStatus('Could not write to the remembered file (it may have moved), so an updated copy was downloaded instead. Replace your previous watchlist file with it; next save will ask you to pick it again.','warn');
   }
  }finally{
-  updateSaveButtonState();
+  btn.disabled=false;
  }
 }
 document.getElementById('saveHtml').addEventListener('click',handleSaveClick);
@@ -783,12 +760,9 @@ document.getElementById('resetProgress').addEventListener('click',()=>{
  });
  if(currentDetailId)document.getElementById('modalNotes').value='';
  updateProgress();
- updateSaveButtonState();
  setStatus('Progress cleared in this browser.','info');
 });
 restore();
-dataAtLastSave=JSON.stringify(pruneAll(readEmbedded().entries));
-updateSaveButtonState();
 updateSidebarToggleLabel();
 </script>
 </body></html>
