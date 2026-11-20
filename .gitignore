@@ -1,0 +1,7 @@
+# Personal working copy — contains your actual watched progress and notes, not for the public repo
+marvel_master_watchlist.html
+
+# Source images used only to produce the embedded logo; not needed once embedded
+images/
+
+.DS_Store
